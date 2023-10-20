@@ -1,15 +1,31 @@
 package com.PF.apirest.modelo;
 
 import java.sql.Date;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "ordenes")
 public class orden {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String numero;
     private Date fechaCreacion;
     private Date fechaRecibida;
     private double total;
 
-    
+    @ManyToOne
+    private usuario usuario;
+
+    @OneToOne(mappedBy = "orden")
+    private detalleOrden detalle;
+
     public orden() {
     }
 
@@ -72,11 +88,32 @@ public class orden {
         this.total = total;
     }
 
+    
 
     @Override
     public String toString() {
         return "orden [id=" + id + ", numero=" + numero + ", fechaCreacion=" + fechaCreacion + ", fechaRecibida="
                 + fechaRecibida + ", total=" + total + "]";
+    }
+
+
+    public usuario getUsuario() {
+        return usuario;
+    }
+
+
+    public void setUsuario(usuario usuario) {
+        this.usuario = usuario;
+    }
+
+
+    public detalleOrden getDetalle() {
+        return detalle;
+    }
+
+
+    public void setDetalle(detalleOrden detalle) {
+        this.detalle = detalle;
     }
 
     

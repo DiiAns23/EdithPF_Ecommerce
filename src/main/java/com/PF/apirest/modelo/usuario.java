@@ -1,6 +1,20 @@
 package com.PF.apirest.modelo;
 
+import java.util.List;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
+
+@Entity
+@Table(name = "usuarios")    
 public class usuario {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY )             
     private Integer id;
     private String nombre;
     private String apellido;
@@ -8,6 +22,12 @@ public class usuario {
     private String password;
     private String rol;
 
+    @OneToMany(mappedBy = "usuario")
+    private List<producto> productos;
+
+    @OneToMany(mappedBy = "usuario")
+
+    private List<orden> ordenes;
 
     public usuario() {
     }
@@ -48,6 +68,17 @@ public class usuario {
     }
     public void setRol(String rol) {
         this.rol = rol;
+    }
+
+    
+
+    public List<producto> getProductos() {
+        return productos;
+    }
+
+
+    public void setProductos(List<producto> productos) {
+        this.productos = productos;
     }
 
 

@@ -1,12 +1,30 @@
 package com.PF.apirest.modelo;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "detalles")
 public class detalleOrden {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
     private Integer id;
     private String nombre;
     private double precio;
     private double cantidad;
     private double total;
     
+    @OneToOne
+    private orden orden;
+
+    @ManyToOne
+    private producto producto;
+
     public detalleOrden() {
     }
 
@@ -56,6 +74,24 @@ public class detalleOrden {
 
     public void setTotal(double total) {
         this.total = total;
+    }
+
+
+    
+    public orden getOrden() {
+        return orden;
+    }
+
+    public void setOrden(orden orden) {
+        this.orden = orden;
+    }
+
+    public producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(producto producto) {
+        this.producto = producto;
     }
 
     @Override
