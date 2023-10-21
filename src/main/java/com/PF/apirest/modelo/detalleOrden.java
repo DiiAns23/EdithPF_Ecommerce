@@ -28,13 +28,20 @@ public class detalleOrden {
     public detalleOrden() {
     }
 
-    public detalleOrden(Integer id, String nombre, double precio, double cantidad, double total) {
+
+
+    public detalleOrden(Integer id, String nombre, double precio, double cantidad, double total,
+            com.PF.apirest.modelo.orden orden, com.PF.apirest.modelo.producto producto) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
         this.cantidad = cantidad;
         this.total = total;
+        this.orden = orden;
+        this.producto = producto;
     }
+
+
 
     public Integer getId() {
         return id;
@@ -75,8 +82,6 @@ public class detalleOrden {
     public void setTotal(double total) {
         this.total = total;
     }
-
-
     
     public orden getOrden() {
         return orden;
@@ -99,6 +104,5 @@ public class detalleOrden {
         return "detalleOrden [id=" + id + ", nombre=" + nombre + ", precio=" + precio + ", cantidad=" + cantidad
                 + ", total=" + total + "]";
     }
-    
     
 }

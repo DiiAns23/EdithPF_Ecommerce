@@ -1,5 +1,6 @@
 package com.PF.apirest.servicios;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,11 @@ public class productoServiceImpl implements productoService{
     @Override
     public void delete(Integer id) {
         productoRepository.deleteById(id);
+    }
+
+    @Override
+    public List<producto> findAll() {
+        return productoRepository.findAll();
     }
     
 }

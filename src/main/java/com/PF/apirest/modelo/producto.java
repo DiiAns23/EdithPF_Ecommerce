@@ -25,6 +25,7 @@ public class producto {
     public producto() {
     }
 
+    
     public producto(Integer id, String nombre, String descripcion, String imagen, double precio, int cantidad,
             com.PF.apirest.modelo.usuario usuario) {
         this.id = id;
@@ -36,8 +37,10 @@ public class producto {
         this.usuario = usuario;
     }
 
+
+
     public Integer getId() {
-        return this.id;
+        return id;
     }
 
 
@@ -47,7 +50,7 @@ public class producto {
 
 
     public String getNombre() {
-        return this.nombre;
+        return nombre;
     }
 
 
@@ -57,7 +60,7 @@ public class producto {
 
 
     public String getDescripcion() {
-        return this.descripcion;
+        return descripcion;
     }
 
 
@@ -67,7 +70,7 @@ public class producto {
 
 
     public String getImagen() {
-        return this.imagen;
+        return imagen;
     }
 
 
@@ -77,7 +80,7 @@ public class producto {
 
 
     public double getPrecio() {
-        return this.precio;
+        return precio;
     }
 
 
@@ -87,20 +90,24 @@ public class producto {
 
 
     public int getCantidad() {
-        return this.cantidad;
+        return cantidad;
     }
 
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
+
+
     
+
+
     @Override
     public String toString() {
-        // Aqui igual lo correcto es ponerle el this. antes del nombre de la variable, no hay problema pero por buenas practicas
         return "producto [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", imagen=" + imagen
                 + ", precio=" + precio + ", cantidad=" + cantidad + "]";
     }
+
 
     public usuario getUsuario() {
         return this.usuario;

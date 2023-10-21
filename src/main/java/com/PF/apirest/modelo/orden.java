@@ -1,6 +1,6 @@
 package com.PF.apirest.modelo;
 
-import java.sql.Date;
+import java.util.Date;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,12 +30,15 @@ public class orden {
     }
 
 
-    public orden(Integer id, String numero, Date fechaCreacion, Date fechaRecibida, double total) {
+    public orden(Integer id, String numero, Date fechaCreacion, Date fechaRecibida, double total,
+            com.PF.apirest.modelo.usuario usuario, detalleOrden detalle) {
         this.id = id;
         this.numero = numero;
         this.fechaCreacion = fechaCreacion;
         this.fechaRecibida = fechaRecibida;
         this.total = total;
+        this.usuario = usuario;
+        this.detalle = detalle;
     }
 
 
@@ -88,12 +91,11 @@ public class orden {
         this.total = total;
     }
 
-    
 
     @Override
     public String toString() {
         return "orden [id=" + id + ", numero=" + numero + ", fechaCreacion=" + fechaCreacion + ", fechaRecibida="
-                + fechaRecibida + ", total=" + total + "]";
+                + fechaRecibida + ", total=" + total + ", usuario=" + usuario + ", detalle=" + detalle + "]";
     }
 
 

@@ -1,7 +1,7 @@
 package com.PF.apirest.servicios;
 
 import java.util.Optional;
-
+import java.util.List;
 import com.PF.apirest.modelo.producto;
 
 public interface productoService {
@@ -9,5 +9,5 @@ public interface productoService {
     public Optional<producto> get(Integer id);
     public void update(producto producto);
     public void delete(Integer id);
-
+    public List<producto> findAll();
 }
