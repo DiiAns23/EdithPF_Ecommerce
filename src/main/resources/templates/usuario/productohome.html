@@ -21,7 +21,7 @@
 <body>
 
   <!-- Navigation -->
-  <div th:insert="~{usuario/template_usuario.html::header}"></div>
+  <div th:include="usuario/template_usuario.html::header"></div>
 
 
     <!-- Page Content -->
@@ -48,7 +48,7 @@
               </a>
             </div>
             <div class="col-lg-6">
-              <form action="carrito.html" method="POST">
+              <form th:action="@{/cart}" method="POST">
                 <h2 class="card-title" th:text="${producto.nombre}"></h2>
 
                 <ul class="list-group">
@@ -61,10 +61,7 @@
                     min="1" max="5" value="1">
                   </h6></li>
                 </ul>
-
-
                 <button type="submit"  class="btn btn-dark">Añadir al carrito </button>
-
               </form>
             </div>
           </div>
@@ -72,7 +69,7 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <!-- Footer -->
-<div th:insert="~{administrador/template_admin.html::footer}"></div>
+<div th:include="usuario/template_usuario.html::footer"></div>
 
 <!-- Bootstrap core JavaScript -->
 <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
