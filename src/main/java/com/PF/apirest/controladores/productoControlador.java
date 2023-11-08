@@ -1,6 +1,10 @@
 package com.PF.apirest.controladores;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.*;
@@ -16,8 +20,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.PF.apirest.modelo.producto;
 import com.PF.apirest.modelo.usuario;
+import com.PF.apirest.reportes.productoExporterPDF;
 import com.PF.apirest.servicios.productoService;
 import com.PF.apirest.servicios.uploadFileService;
+import com.lowagie.text.DocumentException;
+
+import jakarta.servlet.http.HttpServletResponse;
 
 
 @Controller
@@ -112,5 +120,20 @@ public class productoControlador {
 
         productoService.delete(id);
         return "redirect:/productos";
+    }
+
+
+    @GetMapping("/exportarPDF")
+    public void exportarListaProductosPDF(HttpServletResponse response) throws DocumentException, IOException{
+        response.setContentType("application/pdf");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String fechaActual = dateFormat.format(new Date(System.currentTimeMillis()));
+        String cabecera = "Content-Disposition";
+        String valor = "attachment; filename=productos_"+fechaActual+".pdf";
+        response.setHeader(cabecera, valor);
+
+        List<producto> listaProductos = productoService.findAll();
+        productoExporterPDF exporter = new productoExporterPDF(listaProductos);
+        exporter.exportar(response);
     }
 }
