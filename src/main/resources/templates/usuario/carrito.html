@@ -32,6 +32,7 @@
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
         <li class="breadcrumb-item active">Carrito</li>
+        
       </ol>
 
       <!-- Blog Post -->
@@ -65,7 +66,7 @@
               <h2 class="card-title">SUBTOTAL</h2>
               <ul class="list-group">
                 <li class="list-group-item"><h5 th:text="${orden.total}">Total</h5></li>
-                <a th:href="@{/resumenorden}" class="btn btn-dark">Ver Orden</a>
+                <a th:href="@{/order}" class="btn btn-dark">Ver Orden</a>
               </ul>
             </div>
           </div>

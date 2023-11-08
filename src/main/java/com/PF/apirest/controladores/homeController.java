@@ -116,5 +116,25 @@ public class homeController {
         model.addAttribute("orden", orden);
         return "/usuario/carrito";
     }
+
+    @GetMapping("/order")
+    public String order(){
+        return "usuario/resumenorden";
+    }
+
+    @GetMapping("/log")
+    public String log(){
+        return "usuario/login";
+    }
+
+    @GetMapping("/reg")
+    public String reg(){
+        return "usuario/registro";
+    }
+
+    @GetMapping("/buy")
+    public String buy(){
+        return "usuario/compras";
+    }
     
 }
