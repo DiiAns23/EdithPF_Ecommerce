@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import com.PF.apirest.modelo.detalleOrden;
 import com.PF.apirest.modelo.producto;
+import com.PF.apirest.modelo.usuario;
+import com.PF.apirest.servicios.InterfzUsuarioService;
 import com.PF.apirest.servicios.productoService;
 import org.springframework.ui.Model;
 
@@ -27,6 +28,9 @@ public class homeController {
 
     @Autowired
     private productoService productoService;
+
+    @Autowired
+    private InterfzUsuarioService usuarioService;
 
     //para almacenar los detalles de la orden
     List<detalleOrden> detalles = new ArrayList<detalleOrden>();
@@ -118,7 +122,14 @@ public class homeController {
     }
 
     @GetMapping("/order")
-    public String order(){
+    public String order(Model model){
+
+        usuario usuario = usuarioService.findById(1).get();
+
+        model.addAttribute("cart", detalles);
+        model.addAttribute("orden", orden);
+        model.addAttribute("usuario", usuario);
+        
         return "usuario/resumenorden";
     }
 
