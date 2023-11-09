@@ -1,5 +1,6 @@
 package com.PF.apirest.controladores;
 
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.List;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.PF.apirest.modelo.detalleOrden;
 import com.PF.apirest.modelo.producto;
 import com.PF.apirest.modelo.usuario;
+import com.PF.apirest.servicios.InterfzDetalleOrdenService;
+import com.PF.apirest.servicios.InterfzOrdenService;
 import com.PF.apirest.servicios.InterfzUsuarioService;
 import com.PF.apirest.servicios.productoService;
 import org.springframework.ui.Model;
@@ -31,6 +34,12 @@ public class homeController {
 
     @Autowired
     private InterfzUsuarioService usuarioService;
+
+    @Autowired
+    private InterfzOrdenService ordenService;
+
+    @Autowired
+    private InterfzDetalleOrdenService detalleOrdenService;
 
     //para almacenar los detalles de la orden
     List<detalleOrden> detalles = new ArrayList<detalleOrden>();
@@ -131,6 +140,32 @@ public class homeController {
         model.addAttribute("usuario", usuario);
         
         return "usuario/resumenorden";
+    }
+    
+    //guardar orden
+    @GetMapping("/saveOrder")
+    public String saveOrder(){
+        Date fechaCreacion = new Date();
+        orden.setFechaCreacion(fechaCreacion);
+        orden.setNumero(ordenService.generarNumeroOrden());
+
+        //usuario 
+        usuario usuario = usuarioService.findById(1).get();
+        orden.setUsuario(usuario);
+        ordenService.save(orden);
+
+        //guardar detalles
+        for(detalleOrden dt:detalles){
+            dt.setOrden(orden);
+            detalleOrdenService.save(dt);
+        }
+
+        //limpiar lista y orden
+        orden = new orden();
+        detalles.clear();
+
+
+        return "redirect:/";
     }
 
     @GetMapping("/log")
