@@ -54,7 +54,7 @@ public class productoControlador {
     @PostMapping("/save")
     public String save(producto producto, @RequestParam("img") MultipartFile file) throws IOException{
         try {
-            usuario u = new usuario(1, "","","","","", null, null);
+            usuario u = new usuario(1, "", "", "", "", "", "", null, null);
             producto.setUsuario(u);
         } catch (Exception e) {
             e.printStackTrace(System.err);

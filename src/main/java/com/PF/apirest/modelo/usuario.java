@@ -20,6 +20,7 @@ public class usuario {
     private String apellido;
     private String email;
     private String password;
+    private String direccion;
     private String rol;
 
     @OneToMany(mappedBy = "usuario")
@@ -34,7 +35,7 @@ public class usuario {
 
 
 
-     public usuario(Integer id, String nombre, String apellido, String email, String password, String rol,
+     public usuario(Integer id, String nombre, String apellido, String email, String password, String direccion, String rol,
             List<producto> productos, List<orden> ordenes) {
         this.id = id;
         this.nombre = nombre;
@@ -42,6 +43,7 @@ public class usuario {
         this.email = email;
         this.password = password;
         this.rol = rol;
+        this.direccion = direccion;
     }
 
 
@@ -115,6 +117,19 @@ public class usuario {
 
 
 
+public String getDireccion() {
+        return direccion;
+    }
+
+
+
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    
+
 
     public String getRol() {
         return rol;
@@ -152,7 +167,7 @@ public class usuario {
     @Override
     public String toString() {
         return "usuario [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email
-                + ", password=" + password + ", rol=" + rol + ", productos=" + productos + ", ordenes=" + ordenes + "]";
+                + ", password=" + password + ", direccion=" + direccion + ", rol=" + rol + ", productos=" + productos + ", ordenes=" + ordenes + "]";
     }
 
 }
