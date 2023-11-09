@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import com.PF.apirest.modelo.producto;
 
 @Repository
-public interface productoRepository extends JpaRepository<producto, Integer>{
+public interface InterfzProductoRepository extends JpaRepository<producto, Integer>{
 }
