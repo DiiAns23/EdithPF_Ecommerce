@@ -26,15 +26,13 @@ public class producto {
     }
 
     
-    public producto(Integer id, String nombre, String descripcion, String imagen, double precio, int cantidad,
-            usuario usuario) {
+    public producto(Integer id, String nombre, String descripcion, String imagen, double precio, int cantidad) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.imagen = imagen;
         this.precio = precio;
         this.cantidad = cantidad;
-        this.usuario = usuario;
     }
 
 

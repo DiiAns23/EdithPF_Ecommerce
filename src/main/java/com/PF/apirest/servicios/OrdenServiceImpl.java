@@ -2,9 +2,12 @@ package com.PF.apirest.servicios;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.PF.apirest.modelo.orden;
+import com.PF.apirest.modelo.usuario;
 import com.PF.apirest.repositories.InterfzOrdenRepository;
 
 @Service
@@ -60,6 +63,16 @@ public class OrdenServiceImpl implements InterfzOrdenService {
 
 
         return numeroConcatenado;
+    }
+
+    @Override
+    public List<orden> findByUsuario(usuario usuario) {
+        return ordenRepository.findByUsuario(usuario);
+    }
+
+    @Override
+    public Optional<orden> findById(Integer id) {
+        return ordenRepository.findById(id);
     }
 
     

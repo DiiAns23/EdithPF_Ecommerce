@@ -5,7 +5,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,7 +18,7 @@ public class detalleOrden {
     private double cantidad;
     private double total;
     
-    @OneToOne
+    @ManyToOne
     private orden orden;
 
     @ManyToOne
@@ -30,15 +29,12 @@ public class detalleOrden {
 
 
 
-    public detalleOrden(Integer id, String nombre, double precio, double cantidad, double total,
-            orden orden, producto producto) {
+    public detalleOrden(Integer id, String nombre, double precio, double cantidad, double total) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
         this.cantidad = cantidad;
         this.total = total;
-        this.orden = orden;
-        this.producto = producto;
     }
 
 

@@ -1,12 +1,14 @@
 package com.PF.apirest.modelo;
 
 import java.util.Date;
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -23,22 +25,19 @@ public class orden {
     @ManyToOne
     private usuario usuario;
 
-    @OneToOne(mappedBy = "orden")
-    private detalleOrden detalle;
+    @OneToMany(mappedBy = "orden")
+    private List<detalleOrden> detalle;
 
     public orden() {
     }
 
 
-    public orden(Integer id, String numero, Date fechaCreacion, Date fechaRecibida, double total,
-            usuario usuario, detalleOrden detalle) {
+    public orden(Integer id, String numero, Date fechaCreacion, Date fechaRecibida, double total) {
         this.id = id;
         this.numero = numero;
         this.fechaCreacion = fechaCreacion;
         this.fechaRecibida = fechaRecibida;
         this.total = total;
-        this.usuario = usuario;
-        this.detalle = detalle;
     }
 
 
@@ -86,7 +85,7 @@ public class orden {
     @Override
     public String toString() {
         return "orden [id=" + id + ", numero=" + numero + ", fechaCreacion=" + fechaCreacion + ", fechaRecibida="
-                + fechaRecibida + ", total=" + total + ", usuario=" + usuario + ", detalle=" + detalle + "]";
+                + fechaRecibida + ", total=" + total + "]";
     }
 
 
@@ -100,14 +99,17 @@ public class orden {
     }
 
 
-    public detalleOrden getDetalle() {
+    public List<detalleOrden> getDetalle() {
         return detalle;
     }
 
 
-    public void setDetalle(detalleOrden detalle) {
+    public void setDetalle(List<detalleOrden> detalle) {
         this.detalle = detalle;
     }
+
+
+    
 
     
 }

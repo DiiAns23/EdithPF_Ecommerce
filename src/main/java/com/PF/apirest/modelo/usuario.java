@@ -31,8 +31,7 @@ public class usuario {
     public usuario() {
     }
 
-     public usuario(Integer id, String nombre, String apellido, String email, String password, String direccion, String rol,
-            List<producto> productos, List<orden> ordenes) {
+     public usuario(Integer id, String nombre, String apellido, String email, String password, String direccion, String rol ) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
