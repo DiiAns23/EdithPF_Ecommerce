@@ -24,7 +24,6 @@ import com.PF.apirest.reportes.productoExporterPDF;
 import com.PF.apirest.servicios.InterfzUsuarioService;
 import com.PF.apirest.servicios.productoService;
 import com.PF.apirest.servicios.uploadFileService;
-import com.PF.apirest.servicios.usuarioServiceImpl;
 import com.lowagie.text.DocumentException;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -129,9 +128,6 @@ public class productoControlador {
         productoService.delete(id);
         return "redirect:/productos";
     }
-
-    
-
 
     @GetMapping("/exportarPDF")
     public void exportarListaProductosPDF(HttpServletResponse response) throws DocumentException, IOException{
