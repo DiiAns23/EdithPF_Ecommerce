@@ -1,6 +1,7 @@
 package com.PF.apirest.controladores;
 
-import org.apache.commons.math3.analysis.function.Log;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.PF.apirest.modelo.usuario;
 import com.PF.apirest.servicios.InterfzUsuarioService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/usuario")
@@ -31,6 +34,31 @@ public class UsuarioController {
         logger.info("Usuario registro: ", usuario);
         usuario.setRol("USER");
         usuarioService.save(usuario);
+        return "redirect:/";
+    }
+
+    @GetMapping("/login")
+    public String login() {
+        return "usuario/login";
+    }
+
+    @PostMapping("/acceder")
+    public String acceder(usuario usuario, HttpSession session) {
+        logger.info("Accesos : {}", usuario);
+
+        Optional<usuario> user = usuarioService.findByEmail(usuario.getEmail());
+        logger.info("Usuario de bd: {}", user.get());
+
+        if(user.isPresent()) {
+            session.setAttribute("idusuario", user.get().getId());
+            if(user.get().getRol().equals("ADMIN")) {
+                return "redirect:/administrador";
+            } else {
+                return "redirect:/";
+                }
+        } else {
+            logger.info("Usuario no existe");
+        }
         return "redirect:/";
     }
 }

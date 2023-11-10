@@ -3,7 +3,6 @@ package com.PF.apirest.controladores;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.Optional;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.List;
 import com.PF.apirest.modelo.orden;
@@ -23,6 +22,9 @@ import com.PF.apirest.servicios.InterfzDetalleOrdenService;
 import com.PF.apirest.servicios.InterfzOrdenService;
 import com.PF.apirest.servicios.InterfzUsuarioService;
 import com.PF.apirest.servicios.productoService;
+
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.ui.Model;
 
 @Controller
@@ -50,7 +52,9 @@ public class homeController {
     orden orden = new orden();
 
     @GetMapping("")
-    public String home(Model model) {
+    public String home(Model model, HttpSession session) {
+
+        log.info("Session del usuario: {}", session.getAttribute("idusuario"));
 
         model.addAttribute("productos", productoService.findAll());
         
@@ -133,9 +137,9 @@ public class homeController {
     }
 
     @GetMapping("/order")
-    public String order(Model model){
+    public String order(Model model, HttpSession session){
 
-        usuario usuario = usuarioService.findById(1).get();
+        usuario usuario = usuarioService.findById(Integer.parseInt(session.getAttribute("idusuario").toString())).get();
 
         model.addAttribute("cart", detalles);
         model.addAttribute("orden", orden);
@@ -146,13 +150,13 @@ public class homeController {
     
     //guardar orden
     @GetMapping("/saveOrder")
-    public String saveOrder(){
+    public String saveOrder(HttpSession session){
         Date fechaCreacion = new Date();
         orden.setFechaCreacion(fechaCreacion);
         orden.setNumero(ordenService.generarNumeroOrden());
 
         //usuario 
-        usuario usuario = usuarioService.findById(1).get();
+        usuario usuario = usuarioService.findById(Integer.parseInt(session.getAttribute("idusuario").toString())).get();
         orden.setUsuario(usuario);
         ordenService.save(orden);
 

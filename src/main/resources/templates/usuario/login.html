@@ -33,7 +33,7 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" th:href="@{/log}">Login</a>
+            <a class="nav-link" th:href="@{/usuario/login}">Login</a>
           </li>
         </ul>
       </div>    
@@ -58,7 +58,7 @@
     </div>
 
     
-    <form  action="#" method="post">
+    <form  th:action="@{/usuario/acceder}" method="post">
       <div class="form-group">
         <label for="email"> Email:  </label>      
         <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese su email" required autocomplete="off"> 
@@ -76,7 +76,7 @@
         </div>      
       </div>    
     </form>
-    <a th:href="@{/reg}" class="card-link">Si aún no tiene cuenta aqui puede registrarse</a>
+    <a th:href="@{/usuario/registro}" class="card-link">Si aún no tiene cuenta aqui puede registrarse</a>
   </div>
   <!-- /.container -->
 

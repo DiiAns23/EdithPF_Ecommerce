@@ -31,7 +31,7 @@ public class detalleOrden {
 
 
     public detalleOrden(Integer id, String nombre, double precio, double cantidad, double total,
-            com.PF.apirest.modelo.orden orden, com.PF.apirest.modelo.producto producto) {
+            orden orden, producto producto) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;

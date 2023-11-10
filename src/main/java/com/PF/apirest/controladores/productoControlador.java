@@ -21,11 +21,14 @@ import org.springframework.web.multipart.MultipartFile;
 import com.PF.apirest.modelo.producto;
 import com.PF.apirest.modelo.usuario;
 import com.PF.apirest.reportes.productoExporterPDF;
+import com.PF.apirest.servicios.InterfzUsuarioService;
 import com.PF.apirest.servicios.productoService;
 import com.PF.apirest.servicios.uploadFileService;
+import com.PF.apirest.servicios.usuarioServiceImpl;
 import com.lowagie.text.DocumentException;
 
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 
 @Controller
@@ -36,6 +39,9 @@ public class productoControlador {
     
     @Autowired
     private productoService productoService;
+
+    @Autowired
+    private InterfzUsuarioService usuarioService;
 
     @Autowired
     private uploadFileService upload;
@@ -52,9 +58,10 @@ public class productoControlador {
     }
 
     @PostMapping("/save")
-    public String save(producto producto, @RequestParam("img") MultipartFile file) throws IOException{
+    public String save(producto producto, @RequestParam("img") MultipartFile file, HttpSession session) throws IOException{
+        //LOGGER.info("Este es el objeto producto {}",producto);
         try {
-            usuario u = new usuario(1, "", "", "", "", "", "", null, null);
+            usuario u = usuarioService.findById(Integer.parseInt(session.getAttribute("idusuario").toString())).get();
             producto.setUsuario(u);
         } catch (Exception e) {
             e.printStackTrace(System.err);
@@ -108,19 +115,22 @@ public class productoControlador {
     }
 
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable Integer id) throws IOException{
-
+    public String delete(@PathVariable Integer id){
         producto p = new producto();
-        p=productoService.get(id).get();
-    
-            if(!p.getImagen().equals("default.jpg")){
+        Optional<producto> optionalProducto = productoService.get(id);
+        p = optionalProducto.get();
+        if(!p.getImagen().equals("default.jpg")){
+            try {
                 upload.deleteImage(p.getImagen());
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        
-
+        }
         productoService.delete(id);
         return "redirect:/productos";
     }
+
+    
 
 
     @GetMapping("/exportarPDF")

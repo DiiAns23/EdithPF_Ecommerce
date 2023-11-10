@@ -31,7 +31,7 @@ public class orden {
 
 
     public orden(Integer id, String numero, Date fechaCreacion, Date fechaRecibida, double total,
-            com.PF.apirest.modelo.usuario usuario, detalleOrden detalle) {
+            usuario usuario, detalleOrden detalle) {
         this.id = id;
         this.numero = numero;
         this.fechaCreacion = fechaCreacion;
@@ -46,46 +46,37 @@ public class orden {
         return id;
     }
 
-
     public void setId(Integer id) {
         this.id = id;
     }
-
 
     public String getNumero() {
         return numero;
     }
 
-
     public void setNumero(String numero) {
         this.numero = numero;
     }
-
 
     public Date getFechaCreacion() {
         return fechaCreacion;
     }
 
-
     public void setFechaCreacion(Date fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
-
 
     public Date getFechaRecibida() {
         return fechaRecibida;
     }
 
-
     public void setFechaRecibida(Date fechaRecibida) {
         this.fechaRecibida = fechaRecibida;
     }
 
-
     public double getTotal() {
         return total;
     }
-
 
     public void setTotal(double total) {
         this.total = total;
