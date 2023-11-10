@@ -3,6 +3,8 @@ package com.PF.apirest.controladores;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import java.util.List;
 import com.PF.apirest.modelo.orden;
 import org.slf4j.Logger;
@@ -168,19 +170,20 @@ public class homeController {
         return "redirect:/";
     }
 
-    @GetMapping("/log")
-    public String log(){
-        return "usuario/login";
+    @PostMapping("/search")
+    public String searchProduct(@RequestParam String nombre, Model model){
+        log.info("Nombre del producto {}", nombre);
+        List<producto> productos = productoService.findAll().stream().filter(p->p.getNombre().contains(nombre)).collect(Collectors.toList());
+        model.addAttribute("productos",productos);
+        return "usuario/home";
     }
 
-    @GetMapping("/reg")
-    public String reg(){
-        return "usuario/registro";
-    }
-
-    @GetMapping("/buy")
-    public String buy(){
-        return "usuario/compras";
+    @PostMapping("/searchAdmin")
+    public String searchProductAdmin(@RequestParam String nombre, Model model){
+        log.info("Nombre del producto {}", nombre);
+        List<producto> productos = productoService.findAll().stream().filter(p->p.getNombre().contains(nombre)).collect(Collectors.toList());
+        model.addAttribute("productos",productos);
+        return "administrador/home";
     }
     
 }
